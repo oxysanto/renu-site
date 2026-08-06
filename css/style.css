@@ -1,0 +1,436 @@
+/* ========================================================
+   ReNU 11804 — Design System v2
+   Technical / engineering-document direction:
+   sharp edges, hairlines, drawing-style corner marks,
+   accent color used sparingly, no ambient glow.
+
+   Fonts are self-hosted — see fonts.css (loaded separately,
+   before this file, in each page's <head>).
+   ======================================================== */
+
+:root {
+  /* Colors */
+  --bg: #05070A;
+  --bg-elevated: #0B0F16;
+  --bg-panel: #0D1219;
+  --line: rgba(198, 206, 220, 0.09);
+  --line-strong: rgba(198, 206, 220, 0.24);
+
+  --blue: #2F72E0;
+  --blue-bright: #5C93EC;
+  --steel: #ADB6C3;
+  --steel-dim: #5F6773;
+
+  --text: #ECEEF2;
+  --text-dim: #8C95A5;
+  --text-faint: #7B8496;
+
+  /* Type */
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Layout */
+  --max-w: 1180px;
+  --edge: 32px;
+  --radius: 2px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  line-height: 1.08;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--steel);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--blue);
+  display: inline-block;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+}
+
+section { padding: 100px 0; }
+
+@media (max-width: 720px) {
+  section { padding: 68px 0; }
+  :root { --edge: 20px; }
+}
+
+/* ---------- Technical divider ---------- */
+.wing-divider {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wing-divider span:nth-child(1),
+.wing-divider span:nth-child(3) {
+  width: 130px;
+  height: 1px;
+  background: var(--line-strong);
+}
+.wing-divider span:nth-child(2) {
+  width: 6px;
+  height: 6px;
+  margin: 0 14px;
+  border: 1px solid var(--steel-dim);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ---------- Corner-frame signature (blueprint marks) ---------- */
+.corner-frame { position: relative; }
+.corner-frame::before,
+.corner-frame::after {
+  content: '';
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+}
+.corner-frame::before {
+  top: -1px; left: -1px;
+  border-top: 1.5px solid var(--steel-dim);
+  border-left: 1.5px solid var(--steel-dim);
+}
+.corner-frame::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 1.5px solid var(--steel-dim);
+  border-right: 1.5px solid var(--steel-dim);
+}
+.corner-frame:hover::before,
+.corner-frame:hover::after {
+  border-color: var(--blue);
+}
+
+/* ---------- Skip link (keyboard accessibility) ---------- */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 12px;
+  background: var(--blue);
+  color: #000000;
+  padding: 10px 18px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 200;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 12px; }
+
+/* ---------- Reusable utilities ---------- */
+.mt-sm { margin-top: 8px; }
+.mt-md { margin-top: 14px; }
+.measure-md { max-width: 560px; }
+
+.section-heading { margin-top: 16px; text-transform: uppercase; }
+.section-heading--measure { max-width: 600px; }
+
+.btn-block { width: 100%; justify-content: center; }
+
+.cta-inner .btn { margin-top: 28px; }
+.cta-inner .mission-text { max-width: 520px; margin: 18px auto 0; }
+
+.footer-brand-blurb { max-width: 280px; }
+
+/* Honeypot anti-spam field — hidden off-screen rather than display:none
+   so it stays in the accessibility tree the same way a display:none
+   field would be skipped by real users but still catches naive bots. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(5, 7, 10, 0.95);
+  border-bottom: 1px solid var(--line);
+}
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+.nav-brand { display: flex; align-items: center; gap: 12px; }
+.nav-brand img { height: 38px; width: 38px; object-fit: contain; }
+.nav-brand .brand-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.02em;
+  display: flex; flex-direction: column; line-height: 1;
+}
+.nav-brand .brand-text small {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--steel);
+  letter-spacing: 0.14em;
+  margin-top: 4px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.nav-links a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1.5px;
+  background: var(--blue);
+}
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-toggle span {
+  width: 24px; height: 1.5px;
+  background: var(--text);
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    position: fixed;
+    top: 76px; left: 0; right: 0;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .nav-links.open { max-height: 480px; }
+  .nav-links a {
+    width: 100%;
+    padding: 18px var(--edge);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-toggle { display: flex; }
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  border: 1px solid transparent;
+}
+.btn-primary {
+  background: var(--blue);
+  color: #000000;
+}
+.btn-primary:hover { background: var(--blue-bright); }
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+.btn-ghost:hover {
+  border-color: var(--steel);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 56px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+.footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.footer-brand img { height: 34px; width: 34px; }
+.footer-brand span { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.footer-col h4 {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  color: var(--steel);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.footer-col p, .footer-col a {
+  font-size: 14.5px;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 10px;
+  transition: color 0.2s ease;
+}
+.footer-col a:hover { color: var(--blue-bright); }
+.footer-bottom {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+}
+@media (max-width: 720px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Focus states ---------- */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--blue-bright);
+  outline-offset: 3px;
+}
+
+/* ---------- Page hero (inner pages) ---------- */
+.page-hero {
+  padding: 168px 0 64px;
+  border-bottom: 1px solid var(--line);
+}
+.page-hero h1 { font-size: clamp(36px, 5.5vw, 54px); margin-top: 18px; text-transform: uppercase; }
+.page-hero .sub { color: var(--text-dim); font-size: 17px; max-width: 600px; margin-top: 18px; }
+
+/* ---------- Stat blocks ---------- */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.stat {
+  background: var(--bg-elevated);
+  padding: 30px 24px;
+  text-align: center;
+}
+.stat .num {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+.stat .label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 10px;
+}
+@media (max-width: 640px) {
+  .stat-row { grid-template-columns: 1fr; }
+}
+
+/* ---------- 404 page ---------- */
+.notfound {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px var(--edge);
+}
+.notfound .eyebrow { justify-content: center; margin-bottom: 18px; }
+.notfound h1 {
+  font-size: clamp(72px, 14vw, 140px);
+  color: var(--text);
+  line-height: 1;
+}
+.notfound p {
+  color: var(--text-dim);
+  font-size: 17px;
+  margin: 18px 0 34px;
+  max-width: 420px;
+}
