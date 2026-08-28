@@ -41,10 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         note.textContent = detail
           ? `Gönderilemedi: ${detail}`
-          : 'Bir sorun oluştu. Lütfen burakzerencakma@gmail.com adresine doğrudan yazın.';
+          : 'Bir sorun oluştu. Lütfen frcrenu@gmail.com adresine doğrudan yazın.';
       }
     } catch (err) {
-      note.textContent = 'Bağlantı hatası. Lütfen burakzerencakma@gmail.com adresine doğrudan yazın.';
+      note.textContent = 'Bağlantı hatası. Lütfen frcrenu@gmail.com adresine doğrudan yazın.';
     } finally {
       note.classList.add('visible');
       btn.disabled = false;
