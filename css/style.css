@@ -1,8 +1,9 @@
 /* ========================================================
-   ReNU 11804 — Design System v2
+   ReNU 11804 — Design System v3
    Technical / engineering-document direction:
    sharp edges, hairlines, drawing-style corner marks,
-   accent color used sparingly, no ambient glow.
+   a single blue accent used sparingly, no ambient glow.
+   See DESIGN.md — every edit must follow it.
 
    Fonts are self-hosted — see fonts.css (loaded separately,
    before this file, in each page's <head>).
@@ -22,8 +23,8 @@
   --steel-dim: #5F6773;
 
   --text: #ECEEF2;
-  --text-dim: #8C95A5;
-  --text-faint: #7B8496;
+  --text-dim: #98A1B3;
+  --text-faint: #8A93A6;
 
   /* Type */
   --font-display: 'Rajdhani', sans-serif;
@@ -312,7 +313,7 @@ section { padding: 100px 0; }
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 40px;
   padding-bottom: 40px;
 }
@@ -335,7 +336,16 @@ section { padding: 100px 0; }
   margin-bottom: 10px;
   transition: color 0.2s ease;
 }
+.footer-col a { display: flex; align-items: center; gap: 10px; }
 .footer-col a:hover { color: var(--blue-bright); }
+.footer-ico {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  fill: currentColor;
+  stroke: currentColor;
+  opacity: 0.85;
+}
 .footer-bottom {
   border-top: 1px solid var(--line);
   padding-top: 24px;
@@ -434,3 +444,69 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   margin: 18px 0 34px;
   max-width: 420px;
 }
+
+/* ---------- Small buttons ---------- */
+.btn-sm { padding: 10px 18px; font-size: 12.5px; }
+
+/* ---------- Cookie consent banner ---------- */
+.cookie-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 300;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--line-strong);
+  padding: 16px var(--edge);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.35);
+}
+.cookie-banner-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.cookie-banner-text {
+  font-size: 14px;
+  color: var(--text-dim);
+  max-width: 640px;
+}
+.cookie-banner-text a { color: var(--blue-bright); text-decoration: underline; }
+.cookie-banner-actions { display: flex; gap: 10px; }
+.cookie-banner-actions .btn { white-space: nowrap; }
+
+/* ---------- Sticky mobile CTA ---------- */
+.sticky-cta {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 250;
+  padding: 10px var(--edge) calc(10px + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, rgba(5, 7, 10, 0.98) 60%, rgba(5, 7, 10, 0));
+  justify-content: center;
+}
+.sticky-cta .btn { width: 100%; justify-content: center; }
+@media (max-width: 720px) {
+  .sticky-cta { display: flex; }
+  body { padding-bottom: 72px; }
+  .cookie-banner { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+}
+
+/* ---------- Legal pages ---------- */
+.legal-h2 {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 34px 0 8px;
+}
+.legal-list {
+  margin: 12px 0 20px;
+  padding-left: 20px;
+  color: var(--text-dim);
+  font-size: 16px;
+  line-height: 1.75;
+}
+.legal-list li { margin-bottom: 6px; }

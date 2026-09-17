@@ -42,4 +42,91 @@ document.addEventListener('DOMContentLoaded', () => {
         : 'rgba(198,206,220,0.09)';
     });
   }
+
+  // Click-to-load Google Maps embed (no third-party request until the user opts in)
+  const mapFrame = document.getElementById('mapFrame');
+  const mapBtn = document.getElementById('mapLoadBtn');
+  if (mapFrame && mapBtn) {
+    mapBtn.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src = mapFrame.getAttribute('data-map-src');
+      frame.title = 'ReNU 11804 konum haritası';
+      frame.loading = 'lazy';
+      frame.setAttribute('allowfullscreen', '');
+      frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      mapFrame.replaceChildren(frame);
+    });
+  }
+
+  // Cookie consent + consent-based analytics (GA4)
+  initConsent();
 });
+
+// Google Analytics 4 Measurement ID
+const GA_MEASUREMENT_ID = 'G-FT3FD86QX2';
+const CONSENT_KEY = 'renu_consent';
+
+function getConsent() {
+  try {
+    return localStorage.getItem(CONSENT_KEY);
+  } catch (_) {
+    return null;
+  }
+}
+
+function setConsent(value) {
+  try {
+    localStorage.setItem(CONSENT_KEY, value);
+  } catch (_) {
+    // storage unavailable; ignore
+  }
+}
+
+function loadAnalytics() {
+  if (typeof window.gtag === 'function') return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  window.gtag('consent', 'default', { analytics_storage: 'denied' });
+  window.gtag('js', new Date());
+  window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_MEASUREMENT_ID);
+  document.head.appendChild(s);
+}
+
+function showCookieBanner() {
+  const banner = document.createElement('div');
+  banner.className = 'cookie-banner';
+  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('aria-label', 'Çerez tercihleri');
+  banner.innerHTML =
+    '<div class="cookie-banner-inner">' +
+      '<p class="cookie-banner-text">Bu site, ziyaretçi analizi için çerezler kullanır. ' +
+      '<a href="/pages/gizlilik-politikasi.html">Gizlilik Politikası</a> incelenebilir.</p>' +
+      '<div class="cookie-banner-actions">' +
+        '<button type="button" class="btn btn-primary btn-sm" data-consent="yes">Kabul Et</button>' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-consent="no">Sadece Zorunlu</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(banner);
+
+  banner.querySelectorAll('[data-consent]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const value = btn.getAttribute('data-consent');
+      setConsent(value);
+      if (value === 'yes') loadAnalytics();
+      banner.remove();
+    });
+  });
+}
+
+function initConsent() {
+  const consent = getConsent();
+  if (consent === 'yes') {
+    loadAnalytics();
+  } else if (consent === null) {
+    showCookieBanner();
+  }
+  // 'no' -> nothing: analytics stays off
+}

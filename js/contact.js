@@ -22,8 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (res.ok) {
-        note.textContent = 'Mesajınız gönderildi, teşekkürler! En kısa sürede dönüş yapacağız.';
-        form.reset();
+        showThanks(form);
       } else {
         // Formspree hata durumunda alan bazlı mesajlar döndürebilir
         // (örn. {"errors":[{"field":"email","message":"..."}]}); varsa göster,
@@ -42,13 +41,34 @@ document.addEventListener('DOMContentLoaded', () => {
         note.textContent = detail
           ? `Gönderilemedi: ${detail}`
           : 'Bir sorun oluştu. Lütfen frcrenu@gmail.com adresine doğrudan yazın.';
+        note.classList.add('visible', 'is-error');
       }
     } catch (err) {
       note.textContent = 'Bağlantı hatası. Lütfen frcrenu@gmail.com adresine doğrudan yazın.';
+      note.classList.add('visible', 'is-error');
     } finally {
-      note.classList.add('visible');
       btn.disabled = false;
       btn.textContent = originalLabel;
     }
   });
 });
+
+// Replace the form with an inline thank-you state after a successful send.
+function showThanks(form) {
+  const wrap = form.closest('.contact-form-wrap');
+  const thanks = document.createElement('div');
+  thanks.className = 'thanks-panel';
+  thanks.innerHTML =
+    '<p class="eyebrow">MESAJ GÖNDERİLDİ</p>' +
+    '<h3 class="thanks-title">Teşekkürler!</h3>' +
+    '<p class="body-text">Mesajınız bize ulaştı. En kısa sürede dönüş yapacağız.</p>' +
+    '<button type="button" class="btn btn-ghost mt-sm" id="thanksBack">Yeni Mesaj Yaz</button>';
+
+  thanks.querySelector('#thanksBack').addEventListener('click', () => {
+    form.reset();
+    thanks.replaceWith(form);
+    form.style.display = '';
+  });
+
+  form.replaceWith(thanks);
+}

@@ -92,6 +92,42 @@
   .dept-grid { grid-template-columns: 1fr; }
 }
 
+/* ---------- Coaches & mentors ---------- */
+.support { margin-top: 72px; }
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 64px;
+  margin-top: 36px;
+}
+.support-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.support-list li {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.support-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.support-role { font-size: 13.5px; color: var(--text-dim); margin-top: 3px; }
+@media (max-width: 720px) {
+  .support { margin-top: 56px; }
+  .support-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
 /* ---------- School section ---------- */
 .school { border-top: 1px solid var(--line); background: var(--bg-elevated); }
 .school-grid {
@@ -179,21 +215,27 @@
 .phase-item h3 { font-family: var(--font-display); font-size: 16.5px; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 4px; }
 .phase-item p { color: var(--text-dim); font-size: 14.5px; }
 
-/* ---------- Robot: pillars ---------- */
-.pillar-grid {
+/* ---------- Robot: design principles (editorial numbered rows) ---------- */
+.principles { margin-top: 40px; }
+.principles li {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-top: 40px;
+  grid-template-columns: 48px 1fr;
+  gap: 22px;
+  padding: 26px 0;
+  border-top: 1px solid var(--line-strong);
 }
-.pillar-card {
-  border-top: 1.5px solid var(--blue);
-  padding-top: 20px;
+.principles li:last-child { border-bottom: 1px solid var(--line-strong); }
+.principles .p-idx {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--blue-bright);
+  padding-top: 4px;
 }
-.pillar-card h3 { font-size: 19px; margin-bottom: 10px; text-transform: uppercase; }
-.pillar-card p { color: var(--text-dim); font-size: 15px; }
+.principles h3 { font-size: 20px; margin-bottom: 8px; text-transform: uppercase; }
+.principles p { color: var(--text-dim); font-size: 15px; }
 @media (max-width: 820px) {
-  .pillar-grid { grid-template-columns: 1fr; }
+  .principles li { grid-template-columns: 36px 1fr; gap: 14px; }
 }
 
 /* ---------- Contact ---------- */
@@ -268,6 +310,16 @@ a.info-value:hover { color: var(--blue-bright); }
   transition: opacity 0.3s ease;
 }
 .form-note.visible { opacity: 1; }
+.form-note.is-error { color: #e08a8a; }
+
+.thanks-panel { padding: 8px 0; }
+.thanks-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin: 14px 0 8px;
+}
 
 @media (max-width: 860px) {
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -281,9 +333,11 @@ a.info-value:hover { color: var(--blue-bright); }
   height: 380px;
   overflow: hidden;
   border: 1px solid var(--line);
+}
+.map-frame iframe {
+  border: 0;
   filter: grayscale(0.3) invert(0.92) contrast(0.9);
 }
-.map-frame iframe { border: 0; }
 
 /* ---------- FRC Nedir?: 2-column value grid (Gracious Professionalism / Coopertition) ---------- */
 .frc-values-grid {
@@ -347,3 +401,95 @@ a.info-value:hover { color: var(--blue-bright); }
 .article-body p { margin-bottom: 18px; }
 .article-body a { color: var(--blue-bright); transition: color 0.2s ease; }
 .article-body a:hover { color: var(--steel); }
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+}
+.breadcrumb a { color: var(--text-dim); transition: color 0.2s ease; }
+.breadcrumb a:hover { color: var(--blue-bright); }
+.breadcrumb [aria-current="page"] { color: var(--text); }
+.breadcrumb .sep { color: var(--text-faint); }
+
+/* ---------- Form consent + fine print ---------- */
+.form-consent { margin: 4px 0 18px; }
+.consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+.consent-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--blue);
+}
+.consent-label a { color: var(--blue-bright); text-decoration: underline; }
+.form-fineprint {
+  margin-top: 14px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-faint);
+}
+
+/* ---------- FAQ ---------- */
+.faq { margin-top: 40px; }
+.faq-item { border-top: 1px solid var(--line-strong); }
+.faq-item:last-child { border-bottom: 1px solid var(--line-strong); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  font-family: var(--font-mono);
+  font-size: 17px;
+  color: var(--blue-bright);
+  flex-shrink: 0;
+}
+.faq-item[open] summary::after { content: '\2212'; }
+.faq-answer {
+  padding: 0 0 22px;
+  max-width: 760px;
+  color: var(--text-dim);
+  font-size: 15.5px;
+}
+.faq-answer a { color: var(--blue-bright); text-decoration: underline; }
+
+/* ---------- Map click-to-load (privacy) ---------- */
+.map-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 40px;
+  min-height: 340px;
+  background: var(--bg-elevated);
+}
+.map-placeholder p { max-width: 440px; color: var(--text-dim); font-size: 14.5px; }
+.map-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
