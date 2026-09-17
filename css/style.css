@@ -265,9 +265,14 @@ section { padding: 100px 0; }
     gap: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    visibility: hidden;
+    transition: max-height 0.3s ease, visibility 0s linear 0.3s;
   }
-  .nav-links.open { max-height: 480px; }
+  .nav-links.open {
+    max-height: 480px;
+    visibility: visible;
+    transition: max-height 0.3s ease, visibility 0s;
+  }
   .nav-links a {
     width: 100%;
     padding: 18px var(--edge);

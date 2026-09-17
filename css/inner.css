@@ -389,7 +389,6 @@ a.info-value:hover { color: var(--blue-bright); }
   color: var(--blue-bright);
   transition: color 0.2s ease;
 }
-.news-card:hover .read-more { color: var(--steel); }
 @media (max-width: 900px) {
   .news-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -398,12 +397,10 @@ a.info-value:hover { color: var(--blue-bright); }
 }
 
 /* ---------- Article page (individual news post) ---------- */
-.article-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 13px; color: var(--text-dim); letter-spacing: 0.04em; transition: color 0.2s ease; }
-.article-back:hover { color: var(--blue-bright); }
 .article-body { max-width: 720px; }
 .article-body p { margin-bottom: 18px; }
 .article-body a { color: var(--blue-bright); transition: color 0.2s ease; }
-.article-body a:hover { color: var(--steel); }
+.article-body a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- Breadcrumb ---------- */
 .breadcrumb {

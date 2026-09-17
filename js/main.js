@@ -102,7 +102,7 @@ function loadAnalytics() {
 function showCookieBanner() {
   const banner = document.createElement('div');
   banner.className = 'cookie-banner';
-  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('role', 'region');
   banner.setAttribute('aria-label', 'Çerez tercihleri');
   banner.innerHTML =
     '<div class="cookie-banner-inner">' +
