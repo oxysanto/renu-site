@@ -199,7 +199,7 @@
   background: transparent;
   min-height: 76px;
 }
-.sponsor-tile img { display: block; height: 40px; width: auto; }
+.sponsor-tile img { display: block; height: 40px; width: auto; filter: brightness(0) invert(1); }
 
 /* ---------- CTA ---------- */
 .cta-section { padding: 84px 0 120px; }
