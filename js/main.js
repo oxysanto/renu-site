@@ -1,5 +1,8 @@
 'use strict';
 
+// No-JS fallback: .reveal is only hidden when this class is present (see style.css)
+document.documentElement.classList.add('js');
+
 // Mobile nav toggle
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
@@ -86,7 +89,8 @@ function loadAnalytics() {
   if (typeof window.gtag === 'function') return;
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { dataLayer.push(arguments); };
-  window.gtag('consent', 'default', { analytics_storage: 'denied' });
+  const granted = getConsent() === 'yes';
+  window.gtag('consent', 'default', { analytics_storage: granted ? 'granted' : 'denied' });
   window.gtag('js', new Date());
   window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
   const s = document.createElement('script');
