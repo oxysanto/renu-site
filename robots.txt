@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://renu-site.vercel.app/sitemap.xml
