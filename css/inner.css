@@ -1,14 +1,9 @@
-/* ========================================================
-   Inner pages (Hakkımızda / Robot / İletişim) — v2
-   ======================================================== */
-
 .body-text {
   color: var(--text-dim);
   font-size: 16.5px;
   margin-bottom: 16px;
 }
 
-/* ---------- Hakkımızda: story ---------- */
 .story-grid {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -20,7 +15,6 @@
   .story-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 
-/* ---------- Values ---------- */
 .values-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -45,7 +39,6 @@
   .values-grid { grid-template-columns: 1fr; }
 }
 
-/* ---------- Team / departments ---------- */
 .dept-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -92,7 +85,6 @@
   .dept-grid { grid-template-columns: 1fr; }
 }
 
-/* ---------- Coaches & mentors ---------- */
 .support { margin-top: 72px; }
 .support-grid {
   display: grid;
@@ -128,7 +120,6 @@
   .support-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 
-/* ---------- School section ---------- */
 .school { border-top: 1px solid var(--line); background: var(--bg-elevated); }
 .school-grid {
   display: grid;
@@ -145,7 +136,6 @@
   .school-address { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
 }
 
-/* ---------- Robot: status banner ---------- */
 .rstatus { padding: 56px 0 0; }
 .status-banner {
   display: inline-flex;
@@ -171,7 +161,6 @@
   .status-dot { animation: none; }
 }
 
-/* ---------- Robot: approach ---------- */
 .approach-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -215,7 +204,6 @@
 .phase-item h3 { font-family: var(--font-display); font-size: 16.5px; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 4px; }
 .phase-item p { color: var(--text-dim); font-size: 14.5px; }
 
-/* ---------- Robot: design principles (editorial numbered rows) ---------- */
 .principles { margin-top: 40px; }
 .principles li {
   display: grid;
@@ -238,7 +226,6 @@
   .principles li { grid-template-columns: 36px 1fr; gap: 14px; }
 }
 
-/* ---------- Contact ---------- */
 .contact-grid {
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
@@ -326,7 +313,6 @@ a.info-value:hover { color: var(--blue-bright); }
   .contact-form-wrap { padding: 26px; }
 }
 
-/* ---------- Map ---------- */
 .map-section { padding: 0 0 110px; }
 .map-frame {
   width: 100%;
@@ -342,7 +328,6 @@ a.info-value:hover { color: var(--blue-bright); }
   filter: grayscale(0.3) invert(0.92) contrast(0.9);
 }
 
-/* ---------- FRC Nedir?: 2-column value grid (Gracious Professionalism / Coopertition) ---------- */
 .frc-values-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -355,7 +340,6 @@ a.info-value:hover { color: var(--blue-bright); }
   .frc-values-grid { grid-template-columns: 1fr; }
 }
 
-/* ---------- Haberler: news listing grid ---------- */
 .news-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -396,13 +380,11 @@ a.info-value:hover { color: var(--blue-bright); }
   .news-grid { grid-template-columns: 1fr; }
 }
 
-/* ---------- Article page (individual news post) ---------- */
 .article-body { max-width: 720px; }
 .article-body p { margin-bottom: 18px; }
 .article-body a { color: var(--blue-bright); transition: color 0.2s ease; }
 .article-body a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---------- Breadcrumb ---------- */
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
@@ -418,7 +400,6 @@ a.info-value:hover { color: var(--blue-bright); }
 .breadcrumb [aria-current="page"] { color: var(--text); }
 .breadcrumb .sep { color: var(--text-faint); }
 
-/* ---------- Form consent + fine print ---------- */
 .form-consent { margin: 4px 0 18px; }
 .consent-label {
   display: flex;
@@ -444,7 +425,6 @@ a.info-value:hover { color: var(--blue-bright); }
   color: var(--text-faint);
 }
 
-/* ---------- FAQ ---------- */
 .faq { margin-top: 40px; }
 .faq-item { border-top: 1px solid var(--line-strong); }
 .faq-item:last-child { border-bottom: 1px solid var(--line-strong); }
@@ -479,7 +459,6 @@ a.info-value:hover { color: var(--blue-bright); }
 }
 .faq-answer a { color: var(--blue-bright); text-decoration: underline; }
 
-/* ---------- Map click-to-load (privacy) ---------- */
 .map-placeholder {
   display: flex;
   flex-direction: column;

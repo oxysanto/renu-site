@@ -1,9 +1,7 @@
 'use strict';
 
-// No-JS fallback: .reveal is only hidden when this class is present (see style.css)
 document.documentElement.classList.add('js');
 
-// Mobile nav toggle
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
@@ -20,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && revealEls.length) {
     const io = new IntersectionObserver((entries) => {
@@ -36,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => el.classList.add('in-view'));
   }
 
-  // Navbar border emphasis on scroll
   const nav = document.querySelector('.navbar');
   if (nav) {
     window.addEventListener('scroll', () => {
@@ -46,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Click-to-load Google Maps embed (no third-party request until the user opts in)
   const mapFrame = document.getElementById('mapFrame');
   const mapBtn = document.getElementById('mapLoadBtn');
   if (mapFrame && mapBtn) {
@@ -61,11 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Cookie consent + consent-based analytics (GA4)
   initConsent();
 });
 
-// Google Analytics 4 Measurement ID
 const GA_MEASUREMENT_ID = 'G-FT3FD86QX2';
 const CONSENT_KEY = 'renu_consent';
 
@@ -80,9 +73,7 @@ function getConsent() {
 function setConsent(value) {
   try {
     localStorage.setItem(CONSENT_KEY, value);
-  } catch (_) {
-    // storage unavailable; ignore
-  }
+  } catch (_) {}
 }
 
 function loadAnalytics() {
@@ -132,5 +123,4 @@ function initConsent() {
   } else if (consent === null) {
     showCookieBanner();
   }
-  // 'no' -> nothing: analytics stays off
 }

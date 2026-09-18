@@ -24,9 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (res.ok) {
         showThanks(form);
       } else {
-        // Formspree hata durumunda alan bazlı mesajlar döndürebilir
-        // (örn. {"errors":[{"field":"email","message":"..."}]}); varsa göster,
-        // yoksa genel bir Türkçe mesaja düş.
         let detail = '';
         try {
           const data = await res.json();
@@ -35,9 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } else if (data.error) {
             detail = data.error;
           }
-        } catch (_) {
-          // JSON değilse sessizce genel mesaja düş
-        }
+        } catch (_) {}
         note.textContent = detail
           ? `Gönderilemedi: ${detail}`
           : 'Bir sorun oluştu. Lütfen frcrenu@gmail.com adresine doğrudan yazın.';
@@ -53,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Replace the form with an inline thank-you state after a successful send.
 function showThanks(form) {
   const wrap = form.closest('.contact-form-wrap');
   const thanks = document.createElement('div');
