@@ -270,7 +270,8 @@ section { padding: 100px 0; }
     background: var(--bg-elevated);
     border: 1px solid var(--line-strong);
     flex-direction: column;
-    gap: 0;
+    gap: 6px;
+    padding: 8px 0;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -279,7 +280,7 @@ section { padding: 100px 0; }
     transition: max-height 0.3s ease, opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.3s;
   }
   .nav-links.open {
-    max-height: 560px;
+    max-height: 620px;
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
@@ -287,10 +288,8 @@ section { padding: 100px 0; }
   }
   .nav-links a {
     width: 100%;
-    padding: 22px 18px;
-    border-bottom: 1px solid var(--line);
+    padding: 24px 18px;
   }
-  .nav-links a:last-child { border-bottom: none; }
   .nav-links a.active::after {
     top: 50%;
     bottom: auto;
