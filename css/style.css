@@ -243,14 +243,20 @@ section { padding: 100px 0; }
 .nav-toggle {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   background: none;
-  border: none;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
   cursor: pointer;
-  padding: 8px;
+  padding: 0;
 }
 .nav-toggle span {
-  width: 24px; height: 1.5px;
+  width: 20px; height: 2px;
   background: var(--text);
   display: block;
 }
@@ -258,29 +264,38 @@ section { padding: 100px 0; }
 @media (max-width: 900px) {
   .nav-links {
     position: fixed;
-    top: 76px; left: 0; right: 0;
+    top: 84px;
+    left: var(--edge);
+    right: var(--edge);
     background: var(--bg-elevated);
-    border-bottom: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     flex-direction: column;
     gap: 0;
     max-height: 0;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
     visibility: hidden;
-    transition: max-height 0.3s ease, visibility 0s linear 0.3s;
+    transition: max-height 0.3s ease, opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.3s;
   }
   .nav-links.open {
-    max-height: 480px;
+    max-height: 520px;
+    opacity: 1;
+    transform: translateY(0);
     visibility: visible;
-    transition: max-height 0.3s ease, visibility 0s;
+    transition: max-height 0.3s ease, opacity 0.25s ease, transform 0.25s ease, visibility 0s;
   }
   .nav-links a {
     width: 100%;
-    padding: 18px var(--edge);
+    padding: 16px 18px;
     border-bottom: 1px solid var(--line);
   }
+  .nav-links a:last-child { border-bottom: none; }
   .nav-links a.active::after {
-    bottom: 0;
-    height: 2px;
+    top: 0; bottom: 0; left: 0; right: auto;
+    width: 3px;
+    height: auto;
+    background: var(--blue);
   }
   .nav-toggle { display: flex; }
 }
