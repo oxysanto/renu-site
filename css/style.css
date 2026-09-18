@@ -279,7 +279,7 @@ section { padding: 100px 0; }
     transition: max-height 0.3s ease, opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.3s;
   }
   .nav-links.open {
-    max-height: 520px;
+    max-height: 560px;
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
@@ -287,14 +287,18 @@ section { padding: 100px 0; }
   }
   .nav-links a {
     width: 100%;
-    padding: 16px 18px;
+    padding: 22px 18px;
     border-bottom: 1px solid var(--line);
   }
   .nav-links a:last-child { border-bottom: none; }
   .nav-links a.active::after {
-    top: 0; bottom: 0; left: 0; right: auto;
-    width: 3px;
-    height: auto;
+    top: 50%;
+    bottom: auto;
+    left: 8px;
+    right: auto;
+    width: 6px;
+    height: 6px;
+    transform: translateY(-50%);
     background: var(--blue);
   }
   .nav-toggle { display: flex; }
