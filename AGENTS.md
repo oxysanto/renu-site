@@ -21,7 +21,7 @@ they are not renegotiated per edit.
   - Yazılım (3): Burak Zeren, Egemen Ertuğral, İlayda İnce
   - İletişim & Medya (5): Doruk Özdava, İsra Beren Bilgiç, Can Alkan, Beril
     Ersavaş, Yağmur Küpeli
-- **Koçlar (öğretmen):** Yaren Çelik, Nazlıhan Cemre Polatlı
+- **Koçlar (öğretmen):** Yaren Çelik, Nazlıcan Cemre Polatlı
 - **Mentörler (şirket):** Selman Dinç (Boeing), Gamze Kurt (3M), Metehan
   Arslan (Dow)
 - **Contact:** frcrenu@gmail.com · Instagram @frcrenu · TikTok @frc.renu

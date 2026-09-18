@@ -278,6 +278,10 @@ section { padding: 100px 0; }
     padding: 18px var(--edge);
     border-bottom: 1px solid var(--line);
   }
+  .nav-links a.active::after {
+    bottom: 0;
+    height: 2px;
+  }
   .nav-toggle { display: flex; }
 }
 
