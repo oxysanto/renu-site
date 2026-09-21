@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const markInView = (el) => el.classList.add('in-view');
 
-  // Ekranda olan "reveal" elemanlarını güvenli şekilde görünür yapan yardımcı.
   const markVisible = () => {
     const vh = window.innerHeight || document.documentElement.clientHeight;
     revealEls.forEach((el) => {
@@ -55,14 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { threshold: revealThreshold });
     revealEls.forEach(el => io.observe(el));
-    // IO bazı tarayıcılarda (özellikle görünürdeki elemanlarda) hiç
-    // tetiklenmezse diye scroll + zamanlayıcı ile yedek kontrol.
     let ticking = false;
     const onScroll = () => {
       if (!ticking) {
         ticking = true;
         requestAnimationFrame(() => { markVisible(); ticking = false; });
       }
+    };
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
