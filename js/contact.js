@@ -4,21 +4,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm');
   if (!form) return;
 
+  const note = document.getElementById('formNote');
+  const btn = form.querySelector('button[type="submit"]');
+  const endpoint = form.getAttribute('action') || '';
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const note = document.getElementById('formNote');
-    const btn = form.querySelector('button[type="submit"]');
-    const endpoint = form.getAttribute('action') || '';
 
     btn.disabled = true;
     const originalLabel = btn.textContent;
     btn.textContent = 'Gönderiliyor...';
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
         body: new FormData(form),
-        headers: { Accept: 'application/json' }
+        headers: { Accept: 'application/json' },
+        signal: controller.signal
       });
 
       if (res.ok) {
@@ -39,9 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
         note.classList.add('visible', 'is-error');
       }
     } catch (err) {
-      note.textContent = 'Bağlantı hatası. Lütfen frcrenu@gmail.com adresine doğrudan yazın.';
+      note.textContent = err.name === 'AbortError'
+        ? 'Yanıt 30 saniye içinde gelmedi. Lütfen frcrenu@gmail.com adresine doğrudan yazın.'
+        : 'Bağlantı hatası. Lütfen frcrenu@gmail.com adresine doğrudan yazın.';
       note.classList.add('visible', 'is-error');
     } finally {
+      clearTimeout(timeoutId);
       btn.disabled = false;
       btn.textContent = originalLabel;
     }
@@ -60,9 +68,11 @@ function showThanks(form) {
 
   thanks.querySelector('#thanksBack').addEventListener('click', () => {
     form.reset();
-    thanks.replaceWith(form);
+    wrap.replaceChild(form, thanks);
+    form.removeAttribute('hidden');
     form.style.display = '';
   });
 
-  form.replaceWith(thanks);
+  form.setAttribute('hidden', '');
+  wrap.replaceChild(thanks, form);
 }

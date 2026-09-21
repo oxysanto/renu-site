@@ -16,21 +16,61 @@ document.addEventListener('DOMContentLoaded', () => {
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
+    const closeMenu = () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+    document.addEventListener('click', (e) => {
+      if (links.classList.contains('open') && !links.contains(e.target) && !toggle.contains(e.target)) {
+        closeMenu();
+      }
+    });
   }
 
   const revealEls = document.querySelectorAll('.reveal');
+  const revealThreshold = 0.150;
+
+  const markInView = (el) => el.classList.add('in-view');
+
+  // Ekranda olan "reveal" elemanlarını güvenli şekilde görünür yapan yardımcı.
+  const markVisible = () => {
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    revealEls.forEach((el) => {
+      if (el.classList.contains('in-view')) return;
+      const r = el.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < vh) markInView(el);
+    });
+  };
+
   if ('IntersectionObserver' in window && revealEls.length) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
+          markInView(entry.target);
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: revealThreshold });
     revealEls.forEach(el => io.observe(el));
+    // IO bazı tarayıcılarda (özellikle görünürdeki elemanlarda) hiç
+    // tetiklenmezse diye scroll + zamanlayıcı ile yedek kontrol.
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => { markVisible(); ticking = false; });
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    markVisible();
+    setTimeout(markVisible, 400);
+    setTimeout(markVisible, 1200);
   } else {
-    revealEls.forEach(el => el.classList.add('in-view'));
+    revealEls.forEach(markInView);
   }
 
   const nav = document.querySelector('.navbar');
