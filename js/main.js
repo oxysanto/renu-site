@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(() => { markVisible(); ticking = false; });
       }
     };
-    };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     markVisible();
