@@ -149,8 +149,8 @@
   .process-list { grid-template-columns: 1fr; }
 }
 
-.sponsor-block { max-width: 640px; }
-.sponsor-block h2 { font-size: clamp(26px, 3.6vw, 38px); margin-top: 16px; text-transform: uppercase; }
+.sponsor-intro { max-width: 640px; }
+.sponsor-intro h2 { font-size: clamp(26px, 3.6vw, 38px); margin-top: 16px; text-transform: uppercase; }
 .sponsor-points {
   margin-top: 28px;
   border-top: 1px solid var(--line);
