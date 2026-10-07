@@ -39,6 +39,8 @@ they are not renegotiated per edit.
 
 - Follow `DESIGN.md` exactly. Do not invent colors, radii, or shadow styles.
 - No filler SaaS copy. Turkish, concrete, specific to ReNU.
+- No code comments anywhere (HTML `<!-- -->`, JS `//`/`/* */`, CSS `/* */`).
+  Comments are removed on sight — the source stays comment-free.
 - Counts of "üye" in `hakkimizda.html` must match the lists above.
 - If a department is edited, update BOTH the member list and the `dept-count`.
 - Keep CSP meta the same shape everywhere; analytics domains already allowlisted.
